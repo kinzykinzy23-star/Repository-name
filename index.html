@@ -7,27 +7,50 @@
 
 <style>
 body{
-    background:#111;
-    color:white;
+    margin:0;
     font-family:Arial,sans-serif;
     text-align:center;
     padding:20px;
+    background: linear-gradient(135deg, #1a1a1a, #2b1b2f, #111);
+    color:white;
 }
 
-.box{
-    max-width:700px;
-    margin:auto;
+/* قلوب */
+.heart{
+    position:fixed;
+    top:-10px;
+    color:#ff7aa2;
+    animation:fall linear infinite;
+    font-size:18px;
+    opacity:0.6;
 }
 
-#content{
-    display:none;
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* تسجيل الدخول */
+#login{
+    margin-top:120px;
+}
+
+.glass{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius:20px;
+    padding:30px;
+    display:inline-block;
 }
 
 input{
-    padding:10px;
+    padding:12px;
     border-radius:10px;
     border:none;
     width:220px;
+    outline:none;
+    margin-top:10px;
 }
 
 button{
@@ -36,55 +59,87 @@ button{
     border-radius:10px;
     font-size:18px;
     cursor:pointer;
+    margin-top:10px;
+    background:#ff5fa2;
+    color:white;
+}
+
+/* المحتوى */
+#content{
+    display:none;
+    max-width:850px;
+    margin:auto;
+}
+
+/* الصور */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:10px;
+    margin-top:15px;
 }
 
 img{
     width:100%;
+    height:180px;
+    object-fit:cover;
     border-radius:15px;
-    margin-top:15px;
 }
 
-a{
+/* عداد */
+#counter{
     color:#ffb6c1;
-    font-size:20px;
-    text-decoration:none;
+    margin:15px 0;
+    font-size:18px;
 }
 
-.final{
-    margin-top:30px;
-    font-size:22px;
+/* رسالة */
+p{
+    line-height:1.8;
 }
 </style>
 </head>
 
 <body>
 
+<!-- قلوب -->
+<script>
+for(let i=0;i<20;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💗";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(h);
+}
+</script>
+
 <div id="login">
-
-<h2>🔒 أدخل كلمة السر</h2>
-
-<input type="password" id="pass">
-
-<br><br>
-
-<button onclick="checkPass()">دخول</button>
-
+    <div class="glass">
+        <h2>🔒 أدخل كلمة السر</h2>
+        <input type="password" id="pass">
+        <br>
+        <button onclick="checkPass()">دخول</button>
+    </div>
 </div>
 
-<div id="content" class="box">
+<div id="content">
 
 <h1>Love ❤️</h1>
 
 <h2 id="counter"></h2>
 
-<p>
-منذ 9 / 4 / 2025 ❤️
-</p>
+<p>منذ 9 / 4 / 2025 ❤️</p>
 
-<img src="photo1.jpg">
-<img src="photo2.jpg">
-<img src="photo3.jpg">
-<img src="photo4.jpg">
+<!-- صور رومانسية -->
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=60">
+<img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=60">
+<img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=60">
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=60">
+
+</div>
 
 <h2>💌 رسالة</h2>
 
@@ -92,22 +147,11 @@ a{
 انا فعلا بحبك و مقدرش استغنى عنك انت كل حياتي و مش مستعده اضيعك من ايدي مهما كان السبب و هسعي لحد ما نبقى زي الاول و احسن كمان بعشقك ❤️❤️❤️
 </p>
 
-<br>
+<a href="https://lnk.to/ahla-w-ahla" target="_blank">🎵 أغنيتنا</a>
 
-<a href="https://lnk.to/ahla-w-ahla" target="_blank">
-🎵 أغنيتنا
-</a>
-
-<div class="final">
-
-<p>
-🎀 دايما مع بعض 🎀
-</p>
-
-<p>
-إنما عَينيكَ، بحَرٌ لامِع، وأني فِي بحَرِ عَينيكَ مُغرم.
-</p>
-
+<div style="margin-top:30px;">
+<p>🎀 دايما مع بعض 🎀</p>
+<p>إنما عَينيكَ، بحَرٌ لامِع، وأني فِي بحَرِ عَينيكَ مُغرم.</p>
 </div>
 
 </div>
@@ -115,25 +159,17 @@ a{
 <script>
 
 function checkPass(){
-
-if(document.getElementById("pass").value==="Me before you"){
-
-document.getElementById("login").style.display="none";
-
-document.getElementById("content").style.display="block";
-
+if(document.getElementById("pass").value.trim() === "Me before you"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("content").style.display="block";
 }else{
-
-alert("كلمة السر غير صحيحة");
-
+    alert("كلمة السر غير صحيحة");
 }
-
 }
 
 const startDate = new Date("2025-04-09T00:00:00");
 
 function updateCounter(){
-
 const now = new Date();
 const diff = now - startDate;
 
@@ -144,11 +180,9 @@ const seconds = Math.floor((diff%(1000*60))/1000);
 
 document.getElementById("counter").innerHTML =
 "❤️ مر " + days + " يوم و " + hours + " ساعة و " + minutes + " دقيقة و " + seconds + " ثانية ❤️";
-
 }
 
 setInterval(updateCounter,1000);
-
 updateCounter();
 
 </script>
